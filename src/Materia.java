@@ -3,8 +3,12 @@ public class Materia{
     private String codigo;
     private int creditos;
 
-    public Materia(String Nombre, String Codigo, int Creditos){
+    public Materia(){}
 
+    public Materia(String Nombre, String Codigo, int Creditos){
+        SetNombre(Nombre);
+        SetCodigo(Codigo);
+        SetCreditos(Creditos);
     }
 
     public boolean SetNombre(String Nombre){
@@ -42,5 +46,4 @@ public class Materia{
     public int GetCreditos(){
         return creditos;
     }
-
 }
