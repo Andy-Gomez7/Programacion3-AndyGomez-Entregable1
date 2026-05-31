@@ -1,9 +1,14 @@
+import java.util.ArrayList;
+
 public class Materia{
     private String nombre;
     private String codigo;
     private int creditos;
+    private ArrayList<Calificacion> calificaciones;
 
-    public Materia(){}
+    public Materia(){
+        calificaciones = new ArrayList<>();
+    }
 
     public Materia(String Nombre, String Codigo, int Creditos){
         SetNombre(Nombre);
@@ -46,4 +51,14 @@ public class Materia{
     public int GetCreditos(){
         return creditos;
     }
+
+    public boolean SetCalificaion(Calificacion Calf){
+        if(Calf != null){
+            calificaciones.add(Calf);
+            return true;
+        }
+        return false;
+    }
+
+    
 }

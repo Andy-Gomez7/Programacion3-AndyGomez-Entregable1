@@ -5,10 +5,11 @@ import java.text.SimpleDateFormat;
 public class Estudiante extends Persona{
     private String matricula;
     private String carrera; 
+
     private String fechaInscripcion;
     private Date fechaActual;
     private SimpleDateFormat Formateador;
-    private ArrayList<Materia> materias; 
+    private ArrayList<Materia> materias;
 
     public Estudiante(){
         super();
