@@ -13,7 +13,7 @@ public class Calificacion {
     }
 
     public boolean SetNota(int Nota){
-        if(Nota > 0 || Nota <= 4){
+        if(Nota > 0){
             nota = Nota;
             return true;
         }

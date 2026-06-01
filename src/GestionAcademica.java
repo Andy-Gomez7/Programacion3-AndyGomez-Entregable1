@@ -142,6 +142,122 @@ public class GestionAcademica {
         estudiante.SetMateria(materia);
     }
 
-    
+    public void RegistrarCalificacion(){
+        Calificacion calificacion = new Calificacion();
+        String nombreMateria;
+        Estudiante estudiante;
+        Materia materia;
+        int matricula, nota;
 
+        scan.nextLine();
+        do{
+            
+            System.out.print("\nDigite la materia en la que quiere calificar: ");
+            nombreMateria = scan.nextLine();
+            materia = BuscarMateria(nombreMateria);
+        } while (calificacion.SetMateria(materia));
+
+        do{
+            System.out.print("\nDigite la matricula del estudiante que quiere calificar: ");
+            matricula = scan.nextInt();
+            estudiante = BuscarEstudiante(matricula);
+        } while (calificacion.SetEstudiante(estudiante));
+        
+        do{
+            System.out.print("\nDigite la calificacion: ");
+            nota = scan.nextInt();    
+        } while (calificacion.SetNota(nota));
+
+        Calificaciones.add(calificacion);
+    }
+
+    public void MenuBuscarEstd(){
+        int op, matricula;
+        String nombre;
+        Estudiante estudiante;
+        
+        do {
+            System.out.print("Digite una opcion: \n1-Buscar por nombre\n2-Buscar por matricula\n3-Salir\n");
+            op = scan.nextInt();
+
+            switch (op) {
+                case 1:
+                    System.out.print("Digite la matricula: ");
+                    matricula = scan.nextInt();
+                    estudiante = BuscarEstudiante(matricula);
+                    System.out.print("Nombre: "+estudiante.GetNombre()+"\n");
+                    System.out.print("Apellido: "+estudiante.GetApellido()+"\n");
+                    System.out.print("Matricula: "+estudiante.GetMatricula()+"\n");
+                    System.out.print("Edad: "+estudiante.GetEdad()+"\n");
+                    System.out.print("Carrera: "+estudiante.GetCarrera()+"\n");
+                    System.out.print("Fecha de inscripcion: "+estudiante.GetFechaInscripcion()+"\n");
+                    break;
+
+                case 2:
+                    scan.nextLine();
+                    System.out.print("Digite la matricula: ");
+                    nombre = scan.nextLine();
+                    estudiante = BuscarEstudiante(nombre);
+                    System.out.print("Nombre: "+estudiante.GetNombre()+"\n");
+                    System.out.print("Apellido: "+estudiante.GetApellido()+"\n");
+                    System.out.print("Matricula: "+estudiante.GetMatricula()+"\n");
+                    System.out.print("Edad: "+estudiante.GetEdad()+"\n");
+                    System.out.print("Carrera: "+estudiante.GetCarrera()+"\n");
+                    System.out.print("Fecha de inscripcion: "+estudiante.GetFechaInscripcion()+"\n");
+                    break;
+
+                case 3:
+                    break;
+            
+                default:
+                    break;
+            }
+        } while (op != 3);
+    }
+
+    public void MostrarEstudiantes(){
+        System.out.println("===============================");
+        System.out.println("           Estudiante          ");
+        System.out.println("===============================\n");
+
+        for(Estudiante estudiante : Estudiates){
+            System.out.println("------------------------------------------------------------");
+            System.out.print("Nombre: "+estudiante.GetNombre()+"\n");
+            System.out.print("Apellido: "+estudiante.GetApellido()+"\n");
+            System.out.print("Matricula: "+estudiante.GetMatricula()+"\n");
+            System.out.print("Edad: "+estudiante.GetEdad()+"\n");
+            System.out.print("Carrera: "+estudiante.GetCarrera()+"\n");
+            System.out.print("Fecha de inscripcion: "+estudiante.GetFechaInscripcion()+"\n");
+            System.out.println("------------------------------------------------------------\n\n");
+        }
+    }
+
+    public void MostrarProfesores(){
+        System.out.println("===============================");
+        System.out.println("           Profesores          ");
+        System.out.println("===============================\n");
+
+        for(Profesor profesores : Profesores){
+            System.out.println("------------------------------------------------------------");
+            System.out.print("Nombre: "+profesores.GetNombre()+"\n");
+            System.out.print("Apellido: "+profesores.GetApellido()+"\n");
+            System.out.print("Codigo: "+profesores.GetCodigo()+"\n");
+            System.out.print("Edad: "+profesores.GetEdad()+"\n");
+            System.out.print("Especialidad: "+profesores.GetEspecialidad()+"\n");
+            System.out.println("------------------------------------------------------------\n\n");
+        }
+    }
+
+    public void MostrarMaterias(){
+        System.out.println("===============================");
+        System.out.println("            Materias           ");
+        System.out.println("===============================\n");
+
+        for(Materia materia : Materias){
+            System.out.println("------------------------------------------------------------");
+            System.out.print("Nombre: "+materia.GetNombre()+"\n");
+            System.out.print("Creditos: "+materia.GetCreditos()+"\n");
+            System.out.println("------------------------------------------------------------\n\n");
+        }
+    }
 }
