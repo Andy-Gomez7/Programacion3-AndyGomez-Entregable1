@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public class GestionAcademica {
     private ArrayList<Estudiante> Estudiates;
@@ -86,7 +87,7 @@ public class GestionAcademica {
 
     public void RegistrarMateria(){
         Materia nuevaMateria = new Materia();
-        String nombre, codigo;
+        String nombre, codigo, profesor;
         int creditos;
 
         scan.nextLine();
@@ -104,6 +105,11 @@ public class GestionAcademica {
             System.out.print("\nDigite los credito de la materia: ");
             creditos = scan.nextInt();
         }while (nuevaMateria.SetCreditos(creditos));
+
+        do{
+            System.out.print("\nDigite el profesor: ");
+            profesor = scan.nextLine();
+        }while (nuevaMateria.SetProfesor(codigo));
 
         Materias.add(nuevaMateria);
     }
@@ -135,9 +141,26 @@ public class GestionAcademica {
         return null;
     }
 
-    public void AsignarMateria(String Estudiante, String Materia){
-        Estudiante estudiante = BuscarEstudiante(Estudiante);
-        Materia materia = BuscarMateria(Materia);
+    private Profesor BuscarProfesor(String nombreProfesor){
+        for(Profesor profesor : Profesores){
+            if(profesor.GetNombre().equals(nombreProfesor)){
+                return profesor;
+            }
+        }
+        return null;
+    }
+
+    public void AsignarMateria(){
+        System.out.print("Digite la materia a asignar: ");
+        String nombreMateria = scan.nextLine();
+        System.out.println("\n");
+
+        System.out.print("Digite el estudiante: ");
+        String nombreEstudiante = scan.nextLine();
+        System.out.println("\n");
+
+        Materia materia = BuscarMateria(nombreMateria);
+        Estudiante estudiante = BuscarEstudiante(nombreEstudiante);
 
         estudiante.SetMateria(materia);
     }
@@ -232,20 +255,14 @@ public class GestionAcademica {
         }
     }
 
-    public void MostrarProfesores(){
-        System.out.println("===============================");
-        System.out.println("           Profesores          ");
-        System.out.println("===============================\n");
-
-        for(Profesor profesores : Profesores){
-            System.out.println("------------------------------------------------------------");
-            System.out.print("Nombre: "+profesores.GetNombre()+"\n");
-            System.out.print("Apellido: "+profesores.GetApellido()+"\n");
-            System.out.print("Codigo: "+profesores.GetCodigo()+"\n");
-            System.out.print("Edad: "+profesores.GetEdad()+"\n");
-            System.out.print("Especialidad: "+profesores.GetEspecialidad()+"\n");
-            System.out.println("------------------------------------------------------------\n\n");
-        }
+    public void MostrarProfesor(Profesor profesor){
+        System.out.println("------------------------------------------------------------");
+        System.out.print("Nombre: "+profesor.GetNombre()+"\n");
+        System.out.print("Apellido: "+profesor.GetApellido()+"\n");
+        System.out.print("Codigo: "+profesor.GetCodigo()+"\n");
+        System.out.print("Edad: "+profesor.GetEdad()+"\n");
+        System.out.print("Especialidad: "+profesor.GetEspecialidad()+"\n");
+        System.out.println("------------------------------------------------------------\n\n");
     }
 
     public void MostrarMaterias(){
@@ -257,7 +274,104 @@ public class GestionAcademica {
             System.out.println("------------------------------------------------------------");
             System.out.print("Nombre: "+materia.GetNombre()+"\n");
             System.out.print("Creditos: "+materia.GetCreditos()+"\n");
+            MostrarProfesor(BuscarProfesor(materia.GetProfesor()));
             System.out.println("------------------------------------------------------------\n\n");
         }
+    }
+
+    public void PromedioGeneral(){
+
+        System.out.println("===============================");
+        System.out.println("            Promedio           ");
+        System.out.println("===============================\n");
+
+        for(Materia materia : Materias){
+            for(Calificacion calificacion : Calificaciones){
+                System.out.print("---------------"+materia.GetCreditos()+"---------------\n");
+                if(materia.GetNombre().equals(calificacion.GetMateria().GetNombre())){
+                    System.out.println("------------------------------------------------------------");
+                    System.out.print("Estudiante: "+calificacion.GetEstudiante().GetNombre()+"\n");
+                    System.out.print("Calificaion: "+calificacion.GetNota()+"\n");
+                    ComprobarPromedio(calificacion.GetNota());
+                    System.out.println("------------------------------------------------------------\n\n");
+                }
+            }    
+        }
+    }
+
+    private void ComprobarPromedio(int nota){
+        if(nota > 70){
+            System.out.print("Aprobado");
+        }
+        else{
+            System.out.print("Reprobado");
+        }
+
+    }
+
+    public void Menu(){
+        int op;
+
+        do {
+            
+            System.out.print("Digite una opcion: ");
+            op = scan.nextInt();
+            System.out.print("\n1. Registrar estudiante");
+            System.out.print("\n2. Registrar profesor");
+            System.out.print("\n3. Registrar materia");
+            System.out.print("\n4. Asignar materia a estudiante");
+            System.out.print("\n5. Registrar calificación");
+            System.out.print("\n6. Buscar estudiante");
+            System.out.print("\n7. Mostrar estudiantes");
+            System.out.print("\n8. Mostrar materias");
+            System.out.print("\n9. Mostrar reporte de promedios\r\n" + //
+                                "");
+            System.out.print("\n10. Salir");
+
+
+            switch (op) {
+                case 1:
+                    RegistrarEstudiante();
+                    break;
+
+                case 2:
+                    RegistrarProfesores();
+                    break;
+
+                case 3:
+                    RegistrarMateria();
+                    break;
+
+                case 4:
+                    AsignarMateria();
+                    break;
+
+                case 5:
+                    RegistrarCalificacion();
+                    break;
+
+                case 6:
+                    MenuBuscarEstd();
+                    break;
+
+                case 7:
+                    MostrarEstudiantes();
+                    break;
+
+                case 8:
+                    MostrarMaterias();
+                    break;
+
+                case 9:
+                    PromedioGeneral();
+
+                case 10:
+                    break;
+            
+                default:
+                    break;
+            }
+
+        } while (op != 10);
     }
 }

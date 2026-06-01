@@ -2,6 +2,7 @@ public class Materia{
     private String nombre;
     private String codigo;
     private int creditos;
+    private String profesor;
 
     public Materia(){}
 
@@ -45,5 +46,17 @@ public class Materia{
 
     public int GetCreditos(){
         return creditos;
+    }
+
+    public boolean SetProfesor(String Profesor){
+        if(!Profesor.isEmpty()){
+            profesor = Profesor;
+            return true; 
+        }
+        return false;
+    }
+
+    public String GetProfesor(){
+        return profesor;
     }
 }
