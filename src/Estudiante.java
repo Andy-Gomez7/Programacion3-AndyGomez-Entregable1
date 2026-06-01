@@ -3,7 +3,7 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class Estudiante extends Persona{
-    private String matricula;
+    private int matricula;
     private String carrera; 
 
     private String fechaInscripcion;
@@ -19,7 +19,7 @@ public class Estudiante extends Persona{
         SetFechaInscripcion();
     }
 
-    public Estudiante(String Nombre, String Apellido, int Edad, String Matricula, String Carrera){
+    public Estudiante(String Nombre, String Apellido, int Edad, int Matricula, String Carrera){
         super(Nombre, Apellido, Edad);
         fechaActual = new Date();
         Formateador = new SimpleDateFormat("dd/MM/yyyy");
@@ -29,15 +29,15 @@ public class Estudiante extends Persona{
         SetFechaInscripcion();
     }
 
-    public boolean SetMatricula(String Matricula){
-        if(!Matricula.isEmpty()){
+    public boolean SetMatricula(int Matricula){
+        if(Matricula > 0){
             matricula = Matricula;
             return true;
         }
         return false;
     }
 
-    public String GetMatricula(){
+    public int GetMatricula(){
         return matricula;
     }
 

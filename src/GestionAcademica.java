@@ -5,19 +5,21 @@ public class GestionAcademica {
     private ArrayList<Estudiante> Estudiates;
     private ArrayList<Profesor> Profesores;
     private ArrayList<Materia> Materias;
+    private ArrayList<Calificacion> Calificaciones;
     private Scanner scan;
 
     public GestionAcademica(){
         Estudiates = new ArrayList<>();
         Profesores = new ArrayList<>();
         Materias = new ArrayList<>();
+        Calificaciones = new ArrayList<>();
         scan = new Scanner(System.in);
     }
 
     public void RegistrarEstudiante(){
         Estudiante nuevoEst = new Estudiante();
-        String nombre, apellido, matricula, carrera;
-        int edad;
+        String nombre, apellido, carrera;
+        int edad, matricula;
 
         scan.nextLine();
         do{
@@ -37,7 +39,7 @@ public class GestionAcademica {
 
         do{
             System.out.print("\nDigite la matricula: ");
-            matricula = scan.nextLine();
+            matricula = scan.nextInt();
         }while (nuevoEst.SetMatricula(matricula));
 
         do{
@@ -106,5 +108,40 @@ public class GestionAcademica {
         Materias.add(nuevaMateria);
     }
 
+    private Estudiante BuscarEstudiante(String nombreEstudiante){
+        for(Estudiante estudiante : Estudiates){
+            if(estudiante.GetNombre().equals(nombreEstudiante)){
+                return estudiante;
+            }
+        }
+        return null;
+    }
+
+    private Estudiante BuscarEstudiante(int Matricula){
+        for(Estudiante estudiante : Estudiates){
+            if(estudiante.GetMatricula() == Matricula){
+                return estudiante;
+            }
+        }
+        return null;
+    }
+
+    private Materia BuscarMateria(String nombreMateria){
+        for(Materia materia: Materias){
+            if(materia.GetNombre().equals(nombreMateria)){
+                return materia;
+            }
+        }
+        return null;
+    }
+
+    public void AsignarMateria(String Estudiante, String Materia){
+        Estudiante estudiante = BuscarEstudiante(Estudiante);
+        Materia materia = BuscarMateria(Materia);
+
+        estudiante.SetMateria(materia);
+    }
+
     
+
 }

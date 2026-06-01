@@ -1,6 +1,8 @@
 public class Calificacion {
     private int nota;
     private Estudiante estudiante;
+    private Materia materia;
+    
 
     public void Calificaicon(){}
 
@@ -32,5 +34,17 @@ public class Calificacion {
 
     public Estudiante GetEstudiante(){
         return estudiante;
-    }   
+    }
+    
+    public boolean SetMateria(Materia Materia){
+        if(Materia != null){
+            materia = Materia;
+            return true;
+        }
+        return false;
+    }
+
+    public Materia GetMateria(){
+        return materia;
+    }
 }
