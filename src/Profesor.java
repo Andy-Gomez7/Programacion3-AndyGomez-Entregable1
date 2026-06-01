@@ -15,9 +15,9 @@ public class Profesor extends Persona {
     public boolean SetCodigo(String Codigo){
         if(!Codigo.isEmpty()){
             codigo = Codigo;
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public String GetCodigo(){
@@ -27,9 +27,9 @@ public class Profesor extends Persona {
     public boolean SetEspecialidad(String Especialidad){
         if(!Especialidad.isEmpty()){
             especialidad = Especialidad;
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public String GetEspecialidad(){

@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.function.Predicate;
 
 public class GestionAcademica {
     private ArrayList<Estudiante> Estudiates;
@@ -43,6 +42,8 @@ public class GestionAcademica {
             matricula = scan.nextInt();
         }while (nuevoEst.SetMatricula(matricula));
 
+        scan.nextLine();
+
         do{
             System.out.print("\nDigite la carrera: ");
             carrera = scan.nextLine();
@@ -71,6 +72,8 @@ public class GestionAcademica {
             System.out.print("\nDigite la edad: ");
             edad = scan.nextInt();
         }while (nuevoProf.SetEdad(edad));
+
+        scan.nextLine();
 
         do{
             System.out.print("\nDigite el codigo: ");
@@ -106,10 +109,12 @@ public class GestionAcademica {
             creditos = scan.nextInt();
         }while (nuevaMateria.SetCreditos(creditos));
 
+        scan.nextLine();
+
         do{
             System.out.print("\nDigite el profesor: ");
             profesor = scan.nextLine();
-        }while (nuevaMateria.SetProfesor(codigo));
+        }while (nuevaMateria.SetProfesor(profesor));
 
         Materias.add(nuevaMateria);
     }
@@ -151,16 +156,26 @@ public class GestionAcademica {
     }
 
     public void AsignarMateria(){
+        scan.nextLine();
+
         System.out.print("Digite la materia a asignar: ");
         String nombreMateria = scan.nextLine();
-        System.out.println("\n");
 
         System.out.print("Digite el estudiante: ");
         String nombreEstudiante = scan.nextLine();
-        System.out.println("\n");
 
         Materia materia = BuscarMateria(nombreMateria);
         Estudiante estudiante = BuscarEstudiante(nombreEstudiante);
+
+        if(estudiante == null){
+            System.out.println("Estudiante no encontrado.");
+            return;
+        }
+
+        if(materia == null){
+            System.out.println("Materia no encontrada.");
+            return;
+        }
 
         estudiante.SetMateria(materia);
     }
@@ -200,25 +215,25 @@ public class GestionAcademica {
         Estudiante estudiante;
         
         do {
-            System.out.print("Digite una opcion: \n1-Buscar por nombre\n2-Buscar por matricula\n3-Salir\n");
+            System.out.print("Digite una opcion: \n1-Buscar por matricula\n2-Buscar por nombre\n3-Salir\n");
             op = scan.nextInt();
 
             switch (op) {
                 case 1:
-                    System.out.print("Digite la matricula: ");
+                    System.out.print("\nDigite la matricula: ");
                     matricula = scan.nextInt();
                     estudiante = BuscarEstudiante(matricula);
-                    System.out.print("Nombre: "+estudiante.GetNombre()+"\n");
+                    System.out.print("\nNombre: "+estudiante.GetNombre()+"\n");
                     System.out.print("Apellido: "+estudiante.GetApellido()+"\n");
                     System.out.print("Matricula: "+estudiante.GetMatricula()+"\n");
                     System.out.print("Edad: "+estudiante.GetEdad()+"\n");
                     System.out.print("Carrera: "+estudiante.GetCarrera()+"\n");
-                    System.out.print("Fecha de inscripcion: "+estudiante.GetFechaInscripcion()+"\n");
+                    System.out.print("Fecha de inscripcion: "+estudiante.GetFechaInscripcion()+"\n\n");
                     break;
 
                 case 2:
                     scan.nextLine();
-                    System.out.print("Digite la matricula: ");
+                    System.out.print("\nDigite el nombre: ");
                     nombre = scan.nextLine();
                     estudiante = BuscarEstudiante(nombre);
                     System.out.print("Nombre: "+estudiante.GetNombre()+"\n");
@@ -226,7 +241,7 @@ public class GestionAcademica {
                     System.out.print("Matricula: "+estudiante.GetMatricula()+"\n");
                     System.out.print("Edad: "+estudiante.GetEdad()+"\n");
                     System.out.print("Carrera: "+estudiante.GetCarrera()+"\n");
-                    System.out.print("Fecha de inscripcion: "+estudiante.GetFechaInscripcion()+"\n");
+                    System.out.print("Fecha de inscripcion: "+estudiante.GetFechaInscripcion()+"\n\n");
                     break;
 
                 case 3:
@@ -256,13 +271,15 @@ public class GestionAcademica {
     }
 
     public void MostrarProfesor(Profesor profesor){
-        System.out.println("------------------------------------------------------------");
+        if(profesor == null){
+        return;
+        }
+
         System.out.print("Nombre: "+profesor.GetNombre()+"\n");
         System.out.print("Apellido: "+profesor.GetApellido()+"\n");
         System.out.print("Codigo: "+profesor.GetCodigo()+"\n");
         System.out.print("Edad: "+profesor.GetEdad()+"\n");
         System.out.print("Especialidad: "+profesor.GetEspecialidad()+"\n");
-        System.out.println("------------------------------------------------------------\n\n");
     }
 
     public void MostrarMaterias(){
@@ -287,13 +304,13 @@ public class GestionAcademica {
 
         for(Materia materia : Materias){
             for(Calificacion calificacion : Calificaciones){
-                System.out.print("---------------"+materia.GetCreditos()+"---------------\n");
                 if(materia.GetNombre().equals(calificacion.GetMateria().GetNombre())){
                     System.out.println("------------------------------------------------------------");
+                    System.out.print("Materia: "+materia.GetNombre()+"\n");
                     System.out.print("Estudiante: "+calificacion.GetEstudiante().GetNombre()+"\n");
                     System.out.print("Calificaion: "+calificacion.GetNota()+"\n");
                     ComprobarPromedio(calificacion.GetNota());
-                    System.out.println("------------------------------------------------------------\n\n");
+                    System.out.println("\n------------------------------------------------------------\n\n");
                 }
             }    
         }
@@ -314,8 +331,7 @@ public class GestionAcademica {
 
         do {
             
-            System.out.print("Digite una opcion: ");
-            op = scan.nextInt();
+            System.out.print("Digite una opcion: \n");
             System.out.print("\n1. Registrar estudiante");
             System.out.print("\n2. Registrar profesor");
             System.out.print("\n3. Registrar materia");
@@ -326,7 +342,8 @@ public class GestionAcademica {
             System.out.print("\n8. Mostrar materias");
             System.out.print("\n9. Mostrar reporte de promedios\r\n" + //
                                 "");
-            System.out.print("\n10. Salir");
+            System.out.print("10. Salir\n");
+            op = scan.nextInt();
 
 
             switch (op) {
@@ -364,6 +381,7 @@ public class GestionAcademica {
 
                 case 9:
                     PromedioGeneral();
+                    break;
 
                 case 10:
                     break;

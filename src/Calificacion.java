@@ -4,20 +4,20 @@ public class Calificacion {
     private Materia materia;
     
 
-    public void Calificaicon(){}
+    public Calificacion(){}
 
-    public void Calificaicon(int Nota, Estudiante Estudiante){
+    public Calificacion(int Nota, Estudiante Estudiante){
         SetNota(Nota);
         SetEstudiante(Estudiante);
 
     }
 
     public boolean SetNota(int Nota){
-        if(Nota > 0){
+        if(Nota >= 0){
             nota = Nota;
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public int GetNota(){
@@ -27,9 +27,9 @@ public class Calificacion {
     public boolean SetEstudiante(Estudiante Estudiante){
         if(Estudiante != null){
             estudiante = Estudiante;
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public Estudiante GetEstudiante(){
@@ -39,9 +39,9 @@ public class Calificacion {
     public boolean SetMateria(Materia Materia){
         if(Materia != null){
             materia = Materia;
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public Materia GetMateria(){

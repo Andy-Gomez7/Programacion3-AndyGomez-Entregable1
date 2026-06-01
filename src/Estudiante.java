@@ -32,9 +32,9 @@ public class Estudiante extends Persona{
     public boolean SetMatricula(int Matricula){
         if(Matricula > 0){
             matricula = Matricula;
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public int GetMatricula(){
@@ -44,9 +44,9 @@ public class Estudiante extends Persona{
     public boolean SetCarrera(String Carrera){
         if(!Carrera.isEmpty()){
             carrera = Carrera;
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public String GetCarrera(){
@@ -64,8 +64,8 @@ public class Estudiante extends Persona{
     public boolean SetMateria(Materia NuevaMateria){
         if(NuevaMateria != null){
             materias.add(NuevaMateria);
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 }

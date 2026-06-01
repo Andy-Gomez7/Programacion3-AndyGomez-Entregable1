@@ -15,9 +15,9 @@ public class Materia{
     public boolean SetNombre(String Nombre){
         if(!Nombre.isEmpty()){
             nombre = Nombre;
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public String GetNombre(){
@@ -25,23 +25,23 @@ public class Materia{
     }
 
     public boolean SetCodigo(String Codigo){
-        if(!codigo.isEmpty()){
+        if(!Codigo.isEmpty()){
             codigo = Codigo;
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
-    public String SetCodigo(){
+    public String GetCodigo(){
         return codigo;
     }
 
     public boolean SetCreditos(int Creditos){
-        if(Creditos > 0 || Creditos <= 5){
+        if(Creditos > 0 && Creditos <= 5){
             creditos = Creditos;
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public int GetCreditos(){
@@ -51,9 +51,9 @@ public class Materia{
     public boolean SetProfesor(String Profesor){
         if(!Profesor.isEmpty()){
             profesor = Profesor;
-            return true; 
+            return false; 
         }
-        return false;
+        return true;
     }
 
     public String GetProfesor(){

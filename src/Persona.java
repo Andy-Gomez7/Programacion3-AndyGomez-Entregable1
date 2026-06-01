@@ -14,9 +14,9 @@ public class Persona {
     public boolean SetNombre(String Nombre){
         if(!Nombre.isEmpty()){
             nombre = Nombre;
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public String GetNombre(){
@@ -26,9 +26,9 @@ public class Persona {
     public boolean SetApellido(String Apellido){
         if(!Apellido.isEmpty()){
             apellido = Apellido;
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public String GetApellido(){
@@ -38,9 +38,9 @@ public class Persona {
     public boolean SetEdad(int Edad){
         if(Edad > 0){
             edad = Edad;
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public int GetEdad(){
